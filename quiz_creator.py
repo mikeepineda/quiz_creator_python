@@ -58,3 +58,6 @@ def main():
             break
     
     print("\nAll questions are saved to", filename)
+
+if __name__ == "__main__":
+    main()
