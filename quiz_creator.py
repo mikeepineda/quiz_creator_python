@@ -39,6 +39,22 @@ def load_existing_questions(filename):
             return json.load(file)
     return []
 
-def save_quesions(filename, questions):
-    with open(filename, "w") as file:
+def save_questions(filename, questions):
+    with open(filename, "w") as file:   #open the file while overwriting
         json.dump(questions, file, indent=4)
+
+def main(): 
+    filename = "quiz_data.json"     #set the name of json file"
+    quiz_data = load_existing_questions(filename) 
+
+    while True: 
+        question_data = get_question_data() 
+        quiz_data.append(question_data)       #add/append the question to the quiz_data
+        save_questions(filename, quiz_data)     #save the question to quiz_data.json file
+        print("Your question was saved!")
+
+        cont = input("\nDo you want to add another question? (yes/no): ").lower()
+        if cont != "yes":
+            break
+    
+    print("\nAll questions are saved to", filename)
