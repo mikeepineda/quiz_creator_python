@@ -8,6 +8,8 @@
 # if no, stop the loop 
 # end
 
+import json
+
 def get_question_data():
     print("\n=== Create a New Quiz Question ===")
     question = input("Input your question here: ")
@@ -24,8 +26,14 @@ def get_question_data():
         if correct not in ['a', 'b', 'c', 'd']:
             print("Invalid. Kindly enter a, b, c, or d")
     
-    return{
+    return {
         "question": question
         "options": option
         "answer": correct
     }
+
+def load_existing_questions(filename):
+    if os.path.exist(filename):     #check if the file exist in the current folder
+        with open(filename, "r") as file:  # open the file in read mode using "r"
+            return json.load(file)
+    return []
