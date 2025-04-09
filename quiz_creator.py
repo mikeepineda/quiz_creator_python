@@ -28,13 +28,13 @@ def get_question_data():
             print("Invalid. Kindly enter a, b, c, or d")
     
     return {
-        "question": question
-        "options": options
+        "question": question,
+        "options": options,
         "answer": correct
     }
 
 def load_existing_questions(filename):
-    if os.path.exist(filename):     #check if the file exist in the current folder
+    if os.path.exists(filename):     #check if the file exist in the current folder
         with open(filename, "r") as file:  # open the file in read mode using "r"
             return json.load(file)
     return []
