@@ -16,3 +16,9 @@ options['a'] = input("Input option a: ")
 options['b'] = input("Input option b: ")
 options['c'] = input("Input option c: ")
 options['d'] = input("Input option d: ")
+
+correct = ""
+while correct not in ['a', 'b', 'c', 'd']:
+    correct = input("What letter is the correct answer (a/b/c/d) ?:  ").lower()
+    if correct not in ['a', 'b', 'c', 'd']:
+        print("Invalid. Kindly enter a, b, c, or d")
