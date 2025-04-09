@@ -13,7 +13,9 @@ import os
 
 def get_question_data():
     print("\n=== Create a New Quiz Question ===")
-    question = input("Input your question here: ")
+    question = input("Input your question here or type 'stop' to finish: ")
+    if question == "stop":
+        return None
 
     options = {}
     options['a'] = input("Input option a: ")
