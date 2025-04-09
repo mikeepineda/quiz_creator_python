@@ -21,7 +21,7 @@ def get_question_data():
     options['c'] = input("Input option c: ")
     options['d'] = input("Input option d: ")
 
-    correct = ""
+    correct = ""        #start an empty string
     while correct not in ['a', 'b', 'c', 'd']:
         correct = input("What letter is the correct answer (a/b/c/d) ?:  ").lower()
         if correct not in ['a', 'b', 'c', 'd']:
