@@ -9,6 +9,7 @@
 # end
 
 import json
+import os
 
 def get_question_data():
     print("\n=== Create a New Quiz Question ===")
@@ -28,7 +29,7 @@ def get_question_data():
     
     return {
         "question": question
-        "options": option
+        "options": options
         "answer": correct
     }
 
@@ -37,3 +38,7 @@ def load_existing_questions(filename):
         with open(filename, "r") as file:  # open the file in read mode using "r"
             return json.load(file)
     return []
+
+def save_quesions(filename, questions):
+    with open(filename, "w") as file:
+        json.dump(questions, file, indent=4)
