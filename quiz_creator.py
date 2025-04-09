@@ -7,3 +7,12 @@
 # ask user if they want add another question
 # if no, stop the loop 
 # end
+
+print("\n=== Create a New Quiz Question ===")
+question = input("Input your question here: ")
+
+options = {}
+options['a'] = input("Input option a: ")
+options['b'] = input("Input option b: ")
+options['c'] = input("Input option c: ")
+options['d'] = input("Input option d: ")
