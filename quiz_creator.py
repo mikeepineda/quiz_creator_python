@@ -8,17 +8,24 @@
 # if no, stop the loop 
 # end
 
-print("\n=== Create a New Quiz Question ===")
-question = input("Input your question here: ")
+def get_question_data():
+    print("\n=== Create a New Quiz Question ===")
+    question = input("Input your question here: ")
 
-options = {}
-options['a'] = input("Input option a: ")
-options['b'] = input("Input option b: ")
-options['c'] = input("Input option c: ")
-options['d'] = input("Input option d: ")
+    options = {}
+    options['a'] = input("Input option a: ")
+    options['b'] = input("Input option b: ")
+    options['c'] = input("Input option c: ")
+    options['d'] = input("Input option d: ")
 
-correct = ""
-while correct not in ['a', 'b', 'c', 'd']:
-    correct = input("What letter is the correct answer (a/b/c/d) ?:  ").lower()
-    if correct not in ['a', 'b', 'c', 'd']:
-        print("Invalid. Kindly enter a, b, c, or d")
+    correct = ""
+    while correct not in ['a', 'b', 'c', 'd']:
+        correct = input("What letter is the correct answer (a/b/c/d) ?:  ").lower()
+        if correct not in ['a', 'b', 'c', 'd']:
+            print("Invalid. Kindly enter a, b, c, or d")
+    
+    return{
+        "question": question
+        "options": option
+        "answer": correct
+    }
