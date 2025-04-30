@@ -3,3 +3,10 @@
 # Use your creativity.
 # Feel free to use any library
 
+# import both libraries json and random
+# open file with questions
+# return file
+# ask for user's answers
+# run quiz using lib random
+# create for loop for every question asked
+# define main 
