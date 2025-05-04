@@ -25,6 +25,9 @@ class QuizApp(QWidget):
         self.timer = QTimer()
         self.remaining_time = self.time_per_question  #track how much time left 
     
+        self.init_ui()
+        self.load_question()
+
     def init_ui(self):  # create GUI with progress bar, timer, questions, multiple choice
         self.setWindowTitle("Quiz Runner")
         self.setGeometry(100, 100, 600, 400)
