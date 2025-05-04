@@ -60,7 +60,15 @@ def load_question(self):
         anim.setEndValue(QRect(0, 0, 600, 100))
         anim.start()
 
-        
+        options = list(q['options'].items())
+        random.shuffle(options)
+        self.correct_answer = q['answer']
+
+        self.progress_bar.setValue(self.current_q)
+    else:
+        self.show_score()
+    
+
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
