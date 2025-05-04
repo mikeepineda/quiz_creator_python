@@ -23,7 +23,7 @@ class QuizApp(QWidget):
         self.score = 0
         self.time_per_question = 15 #seconds
         self.timer = QTimer()
-        self.remaining_time = self.time_per_question  #track how much time left
+        self.remaining_time = self.time_per_question  #track how much time left 
     
     def init_ui(self):  # create GUI with progress bar, timer, questions, multiple choice
         self.setWindowTitle("Quiz Runner")
@@ -69,9 +69,36 @@ def load_question(self):
     else:
         self.show_score()
     
+def update_timer(self):
+    self.remaining_time -= 1
+    self.update_timer_label()
+    if self.remaining_time <= 0:
+        self.timer.stop()
+        QMessageBox.information(self, "Time's Up", "Time's up for this question!")
+        self.current_q += 1
+        self.load_question()
+
 def update_timer_label(self):
     self.timer_label.setText(f"Time left: {self.remaining_time} seconds")
 
+def check_answer(self):
+    self.timer.stop()
+    sender = self.sender()
+    selected = sender.property('answer_key')
+
+    correct_text = self.questions[self.current_q]['options'][self.correct_answer]
+
+    if selected == self.correct_answer:
+        QMessageBox.information(self, "Result", "Correct!")
+        self.score += 1
+    else:
+        QMessageBox.information(
+            self, "Result",
+            f"Incorrect.\nCorrect answer: {self.correct_answer}. {correct_text}" 
+        )
+
+    self.current_q += 1
+    self.load_question()
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
