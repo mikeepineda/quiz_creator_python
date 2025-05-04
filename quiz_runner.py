@@ -68,6 +68,11 @@ class QuizApp(QWidget):
             random.shuffle(options)
             self.correct_answer = q['answer']
 
+            for i, (key, value) in enumerate(options):
+                self.option_buttons[i].setText(f"{key}. {value}")
+                self.option_buttons[i].setProperty('answer_key', key)
+                self.option_buttons[i].setEnabled(True)
+
             self.progress_bar.setValue(self.current_q)
         else:
             self.show_score()
