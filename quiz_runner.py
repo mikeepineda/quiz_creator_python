@@ -4,7 +4,6 @@
 # Feel free to use any library
 
 
-
 # import both libraries json, random, PyQt5 for GUI
 import sys
 import json
@@ -25,9 +24,27 @@ class QuizApp(QWidget):
         self.time_per_question = 15 #seconds
         self.timer = QTimer()
         self.remaining_time = self.time_per_question  #track how much time left
+    
+    def init_ui(self):  # create GUI with progress bar, timer, questions, multiple choice
+        self.setWindowTitle("Quiz Runner")
+        self.setGeometry(100, 100, 600, 400)
 
+        self.layout = QVBoxLayout()
 
-# create GUI with progress bar, timer, questions, multiple choice
+        self.progress_bar = QProgressBar(self)
+        self.progress_bar.setMaximum(len(self.questions))
+        self.progress_bar.setValue(0)
+        self.layout.addWidget(self.progress_bar)
+
+        self.timer_label = QLabel('', self)
+        self.timer_label.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(self.timer_label)
+
+        self.question_label = QLabel('', self)
+        self.question_label.setWordWrap(True)
+        self.question_label.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(self.question_label)
+        
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
