@@ -52,6 +52,15 @@ def load_question(self):
         
         q = self.questions[self.current_q]
         self.question_label.setTest(f"Q{self.current_q + 1}: {q['question']}")
+
+        # Fade-in animation
+        anim = QPropertyAnimation(self.question_label, b"geometry")
+        anim.setDuration(500)
+        anim.setStartValue(QRect(0, 0, 600, 0))
+        anim.setEndValue(QRect(0, 0, 600, 100))
+        anim.start()
+
+        
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
