@@ -107,6 +107,17 @@ class QuizApp(QWidget):
             )
             self.close()
 
+def load_quiz_file():
+    file_dialog = QFileDialog()
+    file_path, _= file_dialog.getOpenFileName(
+        None, "Select Quiz File", "", "JSON Files (*.json)"
+    )
+    if file_path:
+        with open(file_path, 'r') as f:
+            return json.load(f)
+    return None
+
+
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
