@@ -47,7 +47,18 @@ class QuizApp(QWidget):
         self.question_label.setWordWrap(True)
         self.question_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.question_label)
-    
+
+        self.option_buttons = []
+        for i in range(4):
+            btn = QPushButton('', self)
+            btn.clicked.connect(self.check_answer)
+            self.layout.addWidget(btn)
+            self.option_buttons.append(btn)
+
+        self.setLayout(self.layout)
+
+        self.timer.timeout.connect(self.update_timer)
+
     def load_question(self):
         if self.current_q < len(self.questions):
             self.remaining_time = self.time_per_question
