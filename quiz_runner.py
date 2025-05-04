@@ -44,7 +44,14 @@ class QuizApp(QWidget):
         self.question_label.setWordWrap(True)
         self.question_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.question_label)
+
+def load_question(self):
+    if self.current_q < len(self.questions):
+        self.remaining_time = self.time_per_question
+        self.timer.start(1000)
         
+        q = self.questions[self.current_q]
+        self.question_label.setTest(f"Q{self.current_q + 1}: {q['question']}")
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
