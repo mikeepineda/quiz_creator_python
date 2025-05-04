@@ -49,6 +49,7 @@ def load_question(self):
     if self.current_q < len(self.questions):
         self.remaining_time = self.time_per_question
         self.timer.start(1000)
+        self.update_timer_label()
         
         q = self.questions[self.current_q]
         self.question_label.setTest(f"Q{self.current_q + 1}: {q['question']}")
@@ -68,6 +69,8 @@ def load_question(self):
     else:
         self.show_score()
     
+def update_timer_label(self):
+    self.timer_label.setText(f"Time left: {self.remaining_time} seconds")
 
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
