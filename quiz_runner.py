@@ -44,68 +44,69 @@ class QuizApp(QWidget):
         self.question_label.setWordWrap(True)
         self.question_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.question_label)
-
-def load_question(self):
-    if self.current_q < len(self.questions):
-        self.remaining_time = self.time_per_question
-        self.timer.start(1000)
-        self.update_timer_label()
-        
-        q = self.questions[self.current_q]
-        self.question_label.setTest(f"Q{self.current_q + 1}: {q['question']}")
-
-        # Fade-in animation
-        anim = QPropertyAnimation(self.question_label, b"geometry")
-        anim.setDuration(500)
-        anim.setStartValue(QRect(0, 0, 600, 0))
-        anim.setEndValue(QRect(0, 0, 600, 100))
-        anim.start()
-
-        options = list(q['options'].items())
-        random.shuffle(options)
-        self.correct_answer = q['answer']
-
-        self.progress_bar.setValue(self.current_q)
-    else:
-        self.show_score()
     
-def update_timer(self):
-    self.remaining_time -= 1
-    self.update_timer_label()
-    if self.remaining_time <= 0:
+    def load_question(self):
+        if self.current_q < len(self.questions):
+            self.remaining_time = self.time_per_question
+            self.timer.start(1000)
+            self.update_timer_label()
+            
+            q = self.questions[self.current_q]
+            self.question_label.setTest(f"Q{self.current_q + 1}: {q['question']}")
+
+            # Fade-in animation
+            anim = QPropertyAnimation(self.question_label, b"geometry")
+            anim.setDuration(500)
+            anim.setStartValue(QRect(0, 0, 600, 0))
+            anim.setEndValue(QRect(0, 0, 600, 100))
+            anim.start()
+
+            options = list(q['options'].items())
+            random.shuffle(options)
+            self.correct_answer = q['answer']
+
+            self.progress_bar.setValue(self.current_q)
+        else:
+            self.show_score()
+        
+    def update_timer(self):
+        self.remaining_time -= 1
+        self.update_timer_label()
+        if self.remaining_time <= 0:
+            self.timer.stop()
+            QMessageBox.information(self, "Time's Up", "Time's up for this question!")
+            self.current_q += 1
+            self.load_question()
+
+    def update_timer_label(self):
+        self.timer_label.setText(f"Time left: {self.remaining_time} seconds")
+
+    def check_answer(self):
         self.timer.stop()
-        QMessageBox.information(self, "Time's Up", "Time's up for this question!")
+        sender = self.sender()
+        selected = sender.property('answer_key')
+
+        correct_text = self.questions[self.current_q]['options'][self.correct_answer]
+
+        if selected == self.correct_answer:
+            QMessageBox.information(self, "Result", "Correct!")
+            self.score += 1
+        else:
+            QMessageBox.information(
+                self, "Result",
+                f"Incorrect.\nCorrect answer: {self.correct_answer}. {correct_text}" 
+            )
+
         self.current_q += 1
         self.load_question()
 
-def update_timer_label(self):
-    self.timer_label.setText(f"Time left: {self.remaining_time} seconds")
+    def show_score(self):
+            QMessageBox.information(
+                self, "Final Score",
+                f"You scored {self.score} out of {len(self.questions)}"
+            )
+            self.close()
 
-def check_answer(self):
-    self.timer.stop()
-    sender = self.sender()
-    selected = sender.property('answer_key')
-
-    correct_text = self.questions[self.current_q]['options'][self.correct_answer]
-
-    if selected == self.correct_answer:
-        QMessageBox.information(self, "Result", "Correct!")
-        self.score += 1
-    else:
-        QMessageBox.information(
-            self, "Result",
-            f"Incorrect.\nCorrect answer: {self.correct_answer}. {correct_text}" 
-        )
-
-    self.current_q += 1
-    self.load_question()
-
-def show_score(self):
-        QMessageBox.information(
-            self, "Final Score",
-            f"You scored {self.score} out of {len(self.questions)}"
-        )
-        self.close()
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
