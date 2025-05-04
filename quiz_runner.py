@@ -10,3 +10,14 @@
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
 # define main 
+
+
+import sys
+import json
+import random 
+from PyQt5.QtWidgets import (
+    QApplication, QWidget, QLabel, QPushButton, QVBoxLayout,
+    QMessageBox, QFileDialog, QProgressBar
+)
+from PyQt5.QtCore import Qt, QTimer, QPropertyAnimation, QRect
+
