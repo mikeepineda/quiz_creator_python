@@ -99,6 +99,13 @@ def check_answer(self):
 
     self.current_q += 1
     self.load_question()
+
+def show_score(self):
+        QMessageBox.information(
+            self, "Final Score",
+            f"You scored {self.score} out of {len(self.questions)}"
+        )
+        self.close()
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
