@@ -7,7 +7,7 @@
 # import both libraries json, random, PyQt5 for GUI
 import sys
 import json
-import random 
+import random
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QVBoxLayout,
     QMessageBox, QFileDialog, QProgressBar
@@ -15,21 +15,21 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt, QTimer, QPropertyAnimation, QRect
 
 # create widget to organize quiz and GUI
-class QuizApp(QWidget): 
+class QuizApp(QWidget):
     def __init__(self, questions):
-        super().__init__    #initialize
+        super().__init__()
         self.questions = random.sample(questions, len(questions))
         self.current_q = 0
         self.score = 0
-        self.time_per_question = 15 #seconds
+        self.time_per_question = 15  # seconds
         self.timer = QTimer()
-        self.remaining_time = self.time_per_question  #track how much time left 
-    
+        self.remaining_time = self.time_per_question
+
         self.init_ui()
         self.load_question()
 
-    def init_ui(self):  # create GUI with progress bar, timer, questions, multiple choice
-        self.setWindowTitle("Quiz Runner")
+    def init_ui(self): # create GUI with progress bar, timer, questions, multiple choice
+        self.setWindowTitle('Quiz App')
         self.setGeometry(100, 100, 600, 400)
 
         self.layout = QVBoxLayout()
@@ -64,11 +64,11 @@ class QuizApp(QWidget):
             self.remaining_time = self.time_per_question
             self.timer.start(1000)
             self.update_timer_label()
-            
-            q = self.questions[self.current_q]
-            self.question_label.setTest(f"Q{self.current_q + 1}: {q['question']}")
 
-            # Fade-in animation
+            q = self.questions[self.current_q]
+            self.question_label.setText(f"Q{self.current_q + 1}: {q['question']}")
+
+            # Simple fade-in animation
             anim = QPropertyAnimation(self.question_label, b"geometry")
             anim.setDuration(500)
             anim.setStartValue(QRect(0, 0, 600, 0))
@@ -76,7 +76,6 @@ class QuizApp(QWidget):
             anim.start()
 
             options = list(q['options'].items())
-            random.shuffle(options)
             self.correct_answer = q['answer']
 
             for i, (key, value) in enumerate(options):
@@ -87,13 +86,13 @@ class QuizApp(QWidget):
             self.progress_bar.setValue(self.current_q)
         else:
             self.show_score()
-        
+
     def update_timer(self):
         self.remaining_time -= 1
         self.update_timer_label()
         if self.remaining_time <= 0:
             self.timer.stop()
-            QMessageBox.information(self, "Time's Up", "Time's up for this question!")
+            QMessageBox.information(self, "Time's Up", "⏰ Time's up for this question!")
             self.current_q += 1
             self.load_question()
 
@@ -108,27 +107,27 @@ class QuizApp(QWidget):
         correct_text = self.questions[self.current_q]['options'][self.correct_answer]
 
         if selected == self.correct_answer:
-            QMessageBox.information(self, "Result", "Correct!")
+            QMessageBox.information(self, "Result", "✅ Correct!")
             self.score += 1
         else:
             QMessageBox.information(
                 self, "Result",
-                f"Incorrect.\nCorrect answer: {self.correct_answer}. {correct_text}" 
+                f"❌ Incorrect.\nCorrect answer: {self.correct_answer}. {correct_text}"
             )
 
         self.current_q += 1
         self.load_question()
 
     def show_score(self):
-            QMessageBox.information(
-                self, "Final Score",
-                f"You scored {self.score} out of {len(self.questions)}"
-            )
-            self.close()
+        QMessageBox.information(
+            self, "Final Score",
+            f"🎉 You scored {self.score} out of {len(self.questions)}"
+        )
+        self.close()
 
 def load_quiz_file():
     file_dialog = QFileDialog()
-    file_path, _= file_dialog.getOpenFileName(
+    file_path, _ = file_dialog.getOpenFileName(
         None, "Select Quiz File", "", "JSON Files (*.json)"
     )
     if file_path:
@@ -149,6 +148,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
