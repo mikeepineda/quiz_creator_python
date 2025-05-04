@@ -117,7 +117,19 @@ def load_quiz_file():
             return json.load(f)
     return None
 
+def main():
+    app = QApplication(sys.argv)
+    questions = load_quiz_file()
+    if questions:
+        quiz = QuizApp(questions)
+        quiz.show()
+        sys.exit(app.exec_())
+    else:
+        QMessageBox.critical(None, "Error", "Failed to load quiz file.")
+        sys.exit()
 
+if __name__ == "__main__":
+    main()
 # shuffle ques using lib random
 # use check_answer to check if user answer is right/wrong
 # create popups for results every ques
