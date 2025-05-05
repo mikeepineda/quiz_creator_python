@@ -18,7 +18,8 @@ from PyQt5.QtCore import Qt, QTimer, QPropertyAnimation, QRect
 class QuizApp(QWidget):
     def __init__(self, questions):
         super().__init__()
-        self.questions = random.sample(questions, len(questions))
+        self.questions = random.sample(questions, len(questions)) # shuffle ques using lib random
+
         self.current_q = 0
         self.score = 0
         self.time_per_question = 15  # seconds
@@ -99,7 +100,7 @@ class QuizApp(QWidget):
     def update_timer_label(self):
         self.timer_label.setText(f"Time left: {self.remaining_time} seconds")
 
-    def check_answer(self):
+    def check_answer(self):     # use check_answer to check if user answer is right/wrong
         self.timer.stop()
         sender = self.sender()
         selected = sender.property('answer_key')
@@ -107,12 +108,12 @@ class QuizApp(QWidget):
         correct_text = self.questions[self.current_q]['options'][self.correct_answer]
 
         if selected == self.correct_answer:
-            QMessageBox.information(self, "Result", "✅ Correct!")
+            QMessageBox.information(self, "Result", "✅ Correct!")          # create popups for results every ques
             self.score += 1
         else:
             QMessageBox.information(
                 self, "Result",
-                f"❌ Incorrect.\nCorrect answer: {self.correct_answer}. {correct_text}"
+                f"❌ Incorrect.\nCorrect answer: {self.correct_answer}. {correct_text}"     # create popups for results every ques
             )
 
         self.current_q += 1
@@ -121,7 +122,7 @@ class QuizApp(QWidget):
     def show_score(self):
         QMessageBox.information(
             self, "Final Score",
-            f"🎉 You scored {self.score} out of {len(self.questions)}"
+            f"🎉 You scored {self.score} out of {len(self.questions)}"      # create popups for results every ques
         )
         self.close()
 
@@ -135,7 +136,7 @@ def load_quiz_file():
             return json.load(f)
     return None
 
-def main():
+def main():     # define main 
     app = QApplication(sys.argv)
     questions = load_quiz_file()
     if questions:
@@ -148,9 +149,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-# shuffle ques using lib random
-# use check_answer to check if user answer is right/wrong
-# create popups for results every ques
-# define main 
